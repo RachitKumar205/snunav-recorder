@@ -77,8 +77,8 @@ function CreateWaypoint() {
                     <Input type="text" className={"mb-4"} variant="bordered" label="Name" onChange={(e) => setName(e.target.value)}/>
                     <Input type="text" className={"mb-4"} variant="bordered" label="Waypoint ID" onChange={(e) => setWp_id(e.target.value)}/>
                     <div className={"flex-row mb-4"}>
-                        <Chip size="lg" color={"primary"} className={"mr-2"}>Lat: {this.props.coords.latitude}</Chip>
-                        <Chip size="lg" color={"primary"}>Long: {this.props.coords.longitude}</Chip>
+                        <Chip size="lg" color={"primary"} className={"mr-2"}>Lat: {latitude}</Chip>
+                        <Chip size="lg" color={"primary"}>Long: {longitude}</Chip>
                     </div>
                     <Button color="primary" variant="ghost" type={"submit"}>
                         Submit
