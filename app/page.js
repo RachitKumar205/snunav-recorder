@@ -13,7 +13,7 @@ function Home() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get('https://snunav.azurewebsites.net/meshnav/'); // Replace with your actual endpoint URL
+        const response = await axios.get('https://3c369d4b-dae1-4911-a6ca-ec86d65cb9e0-00-28jopz1ld9yxf.riker.replit.dev/meshnav/'); // Replace with your actual endpoint URL
         setData(response.data);
       } catch (error) {
         setError(error);

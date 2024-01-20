@@ -46,7 +46,7 @@ function CreateWaypoint() {
         setIsLoading(true);
 
         try {
-            const response = await axios.post('https://snunav.azurewebsites.net/meshnav/', {
+            const response = await axios.post('https://3c369d4b-dae1-4911-a6ca-ec86d65cb9e0-00-28jopz1ld9yxf.riker.replit.dev/meshnav/', {
                 name,
                 wp_id,
                 latitude,
