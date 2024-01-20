@@ -14,31 +14,27 @@ function CreateWaypoint() {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if (navigator.geolocation) {
+            const watchId = navigator.geolocation.watchPosition(
+                (position) => {
+                    setLatitude(position.coords.latitude);
+                    setLongitude(position.coords.longitude);
+                },
+                (error) => {
+                    console.error('Error watching location:', error);
+                    setError('Unable to get real-time location updates.');
+                },
+                { enableHighAccuracy: true, timeout: 500, maximumAge: 0}
+            );
 
-        const getUserLocation = async () => {
-            if (navigator.geolocation) {
-                try {
-                    await navigator.geolocation.getCurrentPosition(
-                        (position) => {
-                            setLatitude(position.coords.latitude);
-                            setLongitude(position.coords.longitude);
-                        },
-                        (error) => {
-                            console.error("Error getting location:", error);
-                            setError("Unable to determine your location. Please try again or enter it manually.");
-                        }
-                    );
-                } catch (error) {
-                    console.error("Error accessing Geolocation API:", error);
-                    setError("Geolocation is not supported in your browser.");
-                }
-            } else {
-                console.error("Geolocation API is not supported in this browser.");
-                setError("Geolocation is not supported in your browser.");
-            }
-        };
 
-        getUserLocation();
+            return () => {
+                navigator.geolocation.clearWatch(watchId);
+            };
+        } else {
+            console.error('Geolocation API is not supported in this browser.');
+            setError('Geolocation is not supported in your browser.');
+        }
     }, []);
 
     const handleSubmit = async (e) => {
@@ -81,8 +77,8 @@ function CreateWaypoint() {
                     <Input type="text" className={"mb-4"} variant="bordered" label="Name" onChange={(e) => setName(e.target.value)}/>
                     <Input type="text" className={"mb-4"} variant="bordered" label="Waypoint ID" onChange={(e) => setWp_id(e.target.value)}/>
                     <div className={"flex-row mb-4"}>
-                        <Chip size="lg" color={"primary"} className={"mr-2"}>Lat: {latitude}</Chip>
-                        <Chip size="lg" color={"primary"}>Long: {longitude}</Chip>
+                        <Chip size="lg" color={"primary"} className={"mr-2"}>Lat: {this.props.coords.latitude}</Chip>
+                        <Chip size="lg" color={"primary"}>Long: {this.props.coords.longitude}</Chip>
                     </div>
                     <Button color="primary" variant="ghost" type={"submit"}>
                         Submit
