@@ -19,12 +19,7 @@ function CreateWaypoint() {
                 (position) => {
                     setLatitude(position.coords.latitude);
                     setLongitude(position.coords.longitude);
-                },
-                (error) => {
-                    console.error('Error watching location:', error);
-                    setError('Unable to get real-time location updates.');
-                },
-                { enableHighAccuracy: true, timeout: 500, maximumAge: 0}
+                }
             );
 
 
